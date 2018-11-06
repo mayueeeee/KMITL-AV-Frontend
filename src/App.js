@@ -4,10 +4,11 @@ import { inject, observer } from 'mobx-react';
 import Login from './Pages/login'
 
 
-// @inject('routing')
-// @observer
+@inject('routing')
+@observer
 class App extends Component {
   render() {
+    const { location, push, goBack } = this.props.routing;
     return (
       <div className="App">
         {/* <header className="App-header">

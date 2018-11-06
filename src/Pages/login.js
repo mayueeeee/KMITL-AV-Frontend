@@ -31,7 +31,7 @@ export default class Login extends Component {
       <ContainerWarpper>
         <Container fluid>
           <LoginX>
-            <Col xs={12} md={3}>
+            <Col xs={12} md={5} lg={4}>
               <Card>
                 <CardBody>
                   <Row>
