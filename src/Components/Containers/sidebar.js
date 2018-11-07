@@ -1,31 +1,33 @@
-import React from 'react';
-import { Nav, NavItem, NavLink } from 'reactstrap';
+import React from 'react'
+import { Nav, NavItem, NavLink } from 'reactstrap'
+import ProfileImage from '../../Components/ProfileImage'
+import avatar from '../../assets/avatar.jpg'
 
-export default class Example extends React.Component {
+export default class Sidebar extends React.Component {
   render() {
+    const user = JSON.parse(window.localStorage.getItem('lavs-user-data'))
     return (
       <div className="sidebar-container">
-        <p>List Based</p>
+        <div className="sidebar-user-info">
+          <ProfileImage src={avatar} />
+          <p>สวัสดี {user.fullname || ''}</p>
+        </div>
+
+        <div />
         <Nav vertical>
           <NavItem>
-            <NavLink href="#">Link</NavLink>
+            <NavLink href="#">หน้าแรก</NavLink>
           </NavItem>
           <NavItem>
-            <NavLink href="#">Link</NavLink>
+            <NavLink href="#">ประวัติการจอง</NavLink>
           </NavItem>
           <NavItem>
-            <NavLink href="#">Another Link</NavLink>
+            <NavLink href="#">ออกจากระบบ</NavLink>
           </NavItem>
-          <NavItem>
-            <NavLink disabled href="#">Disabled Link</NavLink>
-          </NavItem>
+         
         </Nav>
-        <hr />
-        <p>Link based</p>
-        <Nav vertical>
-          <NavLink href="#">Link</NavLink> <NavLink href="#">Link</NavLink> <NavLink href="#">Another Link</NavLink> <NavLink disabled href="#">Disabled Link</NavLink>
-        </Nav>
+       
       </div>
-    );
+    )
   }
 }

@@ -62,7 +62,7 @@ class Login extends Component {
     window.localStorage.setItem('lavs-user-data',JSON.stringify( res.data.user))
     console.log(res)
     // push('/dashboard')
-    this.props.history.push('/dashboard');
+    this.props.history.push('/');
     console.log(location.pathname)
     // this.forceUpdate()
   }
@@ -85,7 +85,7 @@ class Login extends Component {
                         <FormGroup>
                           <Input type="password" name="password" id="examplePassword" placeholder="Password" onChange={(e) => this.handleChange('password', e)}/>
                         </FormGroup>
-                        <Button color="primary" block onClick={this.doLogin}>
+                        <Button color="primary" block onClick={this.doLogin} size="lg">
                           เข้าสู่ระบบ
                         </Button>
                       </Form>

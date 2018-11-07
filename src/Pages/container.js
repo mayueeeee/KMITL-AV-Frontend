@@ -6,6 +6,8 @@ import { Container, Row, Col } from 'reactstrap'
 import { Switch, Route } from 'react-router-dom'
 import AdminDashboard from './Admin/dashboard'
 import StudentDashboard from './Student/dashboard'
+import BookingForm from '../Pages/Student/Booking/bookingForm'
+import SelectRoomForm from '../Pages/Student/Booking/selectRoomForm'
 @inject('routing')
 // @withRouter
 @observer
@@ -15,10 +17,18 @@ class Dashboard extends React.Component {
   }
   componentDidMount() {
     const { location, push, goBack } = this.props.routing
+    const user = JSON.parse(window.localStorage.getItem('lavs-user-data'))
     console.log(location.pathname)
+    if(user==null){
+      this.props.history.push('/login')
+      
+      console.log('fuck')
+    }
   }
   render() {
     const user = JSON.parse(window.localStorage.getItem('lavs-user-data'))
+    
+    
     console.log(user)
     return (
       <div>
@@ -31,7 +41,11 @@ class Dashboard extends React.Component {
             <Col md={10}>
               <Switch>
                 <div className="view-container">
-                <Route component={user.role == 'admin' ? AdminDashboard : StudentDashboard} />
+                <Route exact path="/booking" component={BookingForm} />
+                <Route exact path="/booking/select" component={SelectRoomForm} />
+                {/* <Route exact path="/" component={user.role == 'admin' ? AdminDashboard : StudentDashboard} /> */}
+                <Route exact path="/" component={StudentDashboard} />
+                
                 </div>
               </Switch>
             </Col>

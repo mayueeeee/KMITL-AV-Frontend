@@ -4,7 +4,7 @@ import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, Un
 import styled from 'styled-components'
 
 const ShadowNavBar = styled(Navbar)`
-  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
+  box-shadow: 3px 5px 6px -2px rgba(148,148,148,0.47);
 `
 
 export default class Example extends React.Component {

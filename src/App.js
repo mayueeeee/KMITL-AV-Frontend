@@ -1,23 +1,28 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
-import { Switch, Route, BrowserRouter, withRouter,LazyRoute } from 'react-router-dom'
+import { Switch, Route, BrowserRouter, withRouter, LazyRoute } from 'react-router-dom'
 // import './App.css';
 import Login from './Pages/login'
 import Container from './Pages/container'
 
 @inject('routing')
 @withRouter
-@observer 
+@observer
 class App extends Component {
-  componentWillMount(){
+  componentDidMount() {
     const { location, push, goBack } = this.props.routing
     const token = window.localStorage.getItem('lavs-access-token')
-    if(token){
-      push('/dashboard')
-
-    }
-    else{
-      // push('/login')
+    const user = JSON.parse(window.localStorage.getItem('lavs-user-data'))
+    // if (token) {
+    //   push('/dashboard')
+    // } else {
+    //   // push('/login')
+    //   // console.log(this.props)
+    // }
+    console.log(token)
+    console.log(user)
+    if (token == undefined||user==null) {
+      push('/login')
       // console.log(this.props)
     }
   }
@@ -26,11 +31,10 @@ class App extends Component {
     return (
       <BrowserRouter>
         {/* <Switch> */}
-          <div>
-          <Route path="/dashboard" name="Dashboard" component={Container} />
-          <Route path="/login" name="Login" component={Login} />
-
-          </div>
+        <div>
+          <Route exact path="/login" name="Login" component={Login} />
+          <Route path="/" name="Home" component={Container} />
+        </div>
         {/* </Switch> */}
       </BrowserRouter>
     )

@@ -1,8 +1,8 @@
 .btn{
     font-family: 'fc_activeregular', sans-serif !important;    
-    font-size: 1.5rem !important;
+    // font-size: 1.5rem !important;
+    border-radius: 25px !important;
 }
-
 p{
     font-family: 'fc_activeregular', sans-serif !important;
     font-size: 1.5rem !important;
@@ -11,6 +11,10 @@ p{
 
 }
 
+th{
+    font-family: 'fc_activeregular', sans-serif !important;
+    font-size: 1.5rem !important;
+}
 .dashboard-container{
     background-color: #f3f3f3;
     height: 100vh;
@@ -21,10 +25,15 @@ p{
     background-color: #fff;
     // height: 100vh;
     padding: 1.5em 1em 1.5em 1em;
+    border-radius: 4px;
 }
 
+.sidebar-user-info{
+    text-align: center;
+}
 .view-container{
     background-color: #fff;
     // height: 100vh;
-    padding: 1.5em 1em 1.5em 1em;
+    padding: 1.5em 2em 1.5em 2em;
+    border-radius: 4px;
 }
