@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import createBrowserHistory from 'history/createBrowserHistory'
 import { Provider } from 'mobx-react'
 import { RouterStore, syncHistoryWithStore } from 'mobx-react-router'
-import { Router } from 'react-router'
+import { Router } from 'react-router-dom'
 import App from './App'
 import './Styles/core.scss'
 import * as serviceWorker from './serviceWorker'
@@ -13,7 +13,7 @@ const routingStore = new RouterStore()
 
 const stores = {
   // Key can be whatever you want
-  routing: routingStore
+  routing: routingStore,  
   // ...other stores
 }
 
@@ -22,7 +22,7 @@ const history = syncHistoryWithStore(browserHistory, routingStore)
 ReactDOM.render(
   <Provider {...stores}>
     <Router history={history}>
-      <App />
+      <App/>
     </Router>
   </Provider>,
   document.getElementById('root')

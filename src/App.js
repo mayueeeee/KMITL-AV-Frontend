@@ -1,37 +1,40 @@
-import React, { Component } from 'react';
-import { inject, observer } from 'mobx-react';
+import React, { Component } from 'react'
+import { inject, observer } from 'mobx-react'
+import { Switch, Route, BrowserRouter, withRouter,LazyRoute } from 'react-router-dom'
 // import './App.css';
 import Login from './Pages/login'
-
+import Container from './Pages/container'
 
 @inject('routing')
-@observer
+@withRouter
+@observer 
 class App extends Component {
+  componentWillMount(){
+    const { location, push, goBack } = this.props.routing
+    const token = window.localStorage.getItem('lavs-access-token')
+    if(token){
+      push('/dashboard')
+
+    }
+    else{
+      // push('/login')
+      // console.log(this.props)
+    }
+  }
   render() {
-    const { location, push, goBack } = this.props.routing;
+    const { location, push, goBack } = this.props.routing
     return (
-      <div className="App">
-        {/* <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header> */}
-        <Login/>
+      <BrowserRouter>
+        {/* <Switch> */}
+          <div>
+          <Route path="/dashboard" name="Dashboard" component={Container} />
+          <Route path="/login" name="Login" component={Login} />
 
-
-
-      </div>
-    );
+          </div>
+        {/* </Switch> */}
+      </BrowserRouter>
+    )
   }
 }
 
-export default App;
+export default App
