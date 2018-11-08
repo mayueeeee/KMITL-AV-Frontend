@@ -10,7 +10,8 @@ export default class Sidebar extends React.Component {
       <div className="sidebar-container">
         <div className="sidebar-user-info">
           <ProfileImage src={avatar} />
-          <p>สวัสดี {user.fullname || ''}</p>
+          {/* <p>สวัสดี {user.fullname || ''}</p> */}
+          <p>สวัสดี {user!=null?user.fullname:""}</p>
         </div>
 
         <div />
