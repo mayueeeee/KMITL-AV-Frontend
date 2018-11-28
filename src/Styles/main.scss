@@ -1,12 +1,42 @@
+html { min-height:100%; }
 .btn{
-    font-family: 'fc_activeregular', sans-serif !important;    
-    font-size: 1.5rem !important;
+    font-family: 'Athiti', sans-serif !important;    
+    // font-size: 1.5rem !important;
+    border-radius: 25px !important;
 }
-
 p{
-    font-family: 'fc_activeregular', sans-serif !important;
+    font-family: 'Athiti', sans-serif !important;
     font-size: 1.5rem !important;
     margin-top: -0.5rem !important;
     margin-bottom: 0.5rem !important;
 
+}
+
+th{
+    font-family: 'Athiti', sans-serif !important;
+    font-size: 1.5rem !important;
+}
+.dashboard-container{
+    position: absolute;
+    background-color: #f3f3f3;
+    min-height: 93.3%;
+    padding: 1.25em 0 1.25em 0;
+    // margin-bottom: 1.25em;
+}
+
+.sidebar-container{
+    background-color: #fff;
+    // height: 100vh;
+    padding: 1.5em 1em 1.5em 1em;
+    border-radius: 4px;
+}
+
+.sidebar-user-info{
+    text-align: center;
+}
+.view-container{
+    background-color: #fff;
+    // height: 100vh;
+    padding: 1.5em 2em 1.5em 2em;
+    border-radius: 4px;
 }

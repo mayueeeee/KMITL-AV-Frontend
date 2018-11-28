@@ -1,0 +1,39 @@
+import React from 'react'
+import { Nav, NavItem, NavLink } from 'reactstrap'
+import ProfileImage from '../ProfileImage'
+import avatar from '../../assets/avatar.jpg'
+
+export default class AdminSidebar extends React.Component {
+  doLogout = ()=>{
+    localStorage.clear()
+    this.props.clearRole()
+    this.props.history.push('/login')
+  }
+  render() {
+    const user = JSON.parse(window.localStorage.getItem('lavs-user-data'))
+    return (
+      <div className="sidebar-container">
+        <div className="sidebar-user-info">
+          <ProfileImage src={avatar} />
+          {/* <p>สวัสดี {user.fullname || ''}</p> */}
+          <p>สวัสดี {user!=null?user.fullname:""}</p>
+        </div>
+
+        <div />
+        <Nav vertical>
+          <NavItem>
+            <NavLink>หน้าแรก</NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink>บันทึกเข้าใช้งาน</NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink onClick={this.doLogout}>ออกจากระบบ</NavLink>
+          </NavItem>
+         
+        </Nav>
+       
+      </div>
+    )
+  }
+}
