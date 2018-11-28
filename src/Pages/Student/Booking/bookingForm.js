@@ -17,24 +17,25 @@ const flatpickr_setting = {
 }
 class BookingForm extends React.Component {
   constructor(props) {
-    super(props)    
+    super(props)
     let last_date = new Date()
     last_date.setHours(15)
     last_date.setMinutes(55)
     last_date.setSeconds(0)
+    last_date.setMilliseconds(0)
 
-    console.log(differenceInMinutes(last_date,new Date()))
+    console.log(differenceInMinutes(last_date, new Date()))
 
     let default_date = new Date()
-    if(differenceInMinutes(last_date,new Date())<30){
+    if (differenceInMinutes(last_date, new Date()) < 30) {
       default_date = addDays(default_date, 1)
       console.log(default_date)
     }
     default_date.setHours(0)
     default_date.setMinutes(0)
     default_date.setSeconds(0)
+    default_date.setMilliseconds(0)
     console.log(default_date)
-
 
     let default_start_time = parse(default_date)
     default_start_time.setHours(8)
@@ -45,8 +46,6 @@ class BookingForm extends React.Component {
     default_end_time.setHours(9)
     default_end_time.setMinutes(0)
     default_end_time.setSeconds(0)
-
-    
 
     this.state = {
       avaliable_room: [],
@@ -69,8 +68,15 @@ class BookingForm extends React.Component {
     this.setState({ reserve_data: tmp })
   }
 
-  showAlert = (text, title = 'เกิดข้อผิดพลาด', type = 'error') => {
-    swal({
+  showAlert = async (text, title = 'เกิดข้อผิดพลาด', type = 'error', config = {}) => {
+    const swalWithBootstrapButtons = swal.mixin({
+      ...config,
+      confirmButtonClass: 'btn btn-primary btn-lg btn-swalert',
+      cancelButtonClass: 'btn btn-secondary btn-lg btn-swalert',
+      buttonsStyling: false
+    })
+
+    return swalWithBootstrapButtons({
       type: type,
       title: title,
       text: text
@@ -139,14 +145,24 @@ class BookingForm extends React.Component {
     } else if (reserveHour > 3) {
       this.showAlert('คุณสามารถจองได้ไม่เกิน3ชั่วโมงต่อการจอง1ครั้ง')
     } else {
-      try{
+      try {
         const res = await axios.post(`/v1/reservation/validate`, this.state.reserve_data)
-        if (res.data.success&&!res.data.canReserve){
-          this.showAlert(`ไม่สามารถจองได้ สาเหตุ: ${res.data.reason}`)
+        if (res.data.success && !res.data.canReserve) {
+          this.showAlert(`ไม่สามารถทำรายการจองในช่วงเวลาที่เลือกได้`)
+        } else if (res.data.success && res.data.canReserve) {
+          const confirm_config = {
+            showCancelButton: true,
+            confirmButtonText: 'ยืนยัน',
+            cancelButtonText: 'ยกเลิก',
+            reverseButtons: true
+          }
+          const modal_res = await this.showAlert('หากคุณไม่มาใช้บริการตามที่จองระบบจะระงับการใช้งานของท่านตามเวลาที่กำหนด', 'คุณแน่ใจหรือไม่ว่าจะทำการจอง?', 'warning', confirm_config)
+          if (modal_res.value) {
+            this.showAlert('คุณสามารถตรวจสอบการจองได้ที่หน้าแรก','จองสำเร็จ',  'success')          
+            this.props.history.push('/')
+          }
         }
-
-      }
-      catch(e){
+      } catch (e) {
         console.log(e)
       }
       // console.log(res)
