@@ -57,9 +57,10 @@ class Login extends Component {
     const { location, push, goBack } = this.props.routing;
     // console.log(this.state)
     // console.log(process.env.API_URL)
-    const res = await axios.post('http://localhost:3000/v1/auth',this.state.login_data)
+    const res = await axios.post('/v1/auth',this.state.login_data)
     window.localStorage.setItem('lavs-access-token',res.data.access_token)
     window.localStorage.setItem('lavs-user-data',JSON.stringify( res.data.user))
+    axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.access_token}`
     console.log(res)
     // push('/dashboard')
     this.props.history.push('/');
