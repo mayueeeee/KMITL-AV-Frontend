@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import { Switch, Route, BrowserRouter, withRouter, LazyRoute } from 'react-router-dom'
+import axios from 'axios'
 // import './App.css';
 import Login from './Pages/login'
 import Container from './Pages/container'
+
+axios.defaults.baseURL = 'http://localhost:3000';
 
 @inject('routing')
 @withRouter
@@ -21,7 +24,7 @@ class App extends Component {
     // }
     console.log(token)
     console.log(user)
-    if (token == undefined||user==null) {
+    if (token === undefined||user==null) {
       push('/login')
       // console.log(this.props)
     }
