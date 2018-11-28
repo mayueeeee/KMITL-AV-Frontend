@@ -1,9 +1,9 @@
 import React from 'react'
 import { Nav, NavItem, NavLink } from 'reactstrap'
-import ProfileImage from '../../Components/ProfileImage'
+import ProfileImage from '../ProfileImage'
 import avatar from '../../assets/avatar.jpg'
 
-export default class Sidebar extends React.Component {
+export default class AdminSidebar extends React.Component {
   doLogout = ()=>{
     localStorage.clear()
     this.props.clearRole()
@@ -25,7 +25,7 @@ export default class Sidebar extends React.Component {
             <NavLink>หน้าแรก</NavLink>
           </NavItem>
           <NavItem>
-            <NavLink>ประวัติการจอง</NavLink>
+            <NavLink>บันทึกเข้าใช้งาน</NavLink>
           </NavItem>
           <NavItem>
             <NavLink onClick={this.doLogout}>ออกจากระบบ</NavLink>

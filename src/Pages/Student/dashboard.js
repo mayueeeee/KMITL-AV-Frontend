@@ -23,7 +23,7 @@ class Dashboard extends React.Component {
           </Col>
         </Row>
 
-        <ReasrvationTable />
+        <ReasrvationTable history={this.props.history}/>
       </div>
     )
   }
