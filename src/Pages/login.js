@@ -65,7 +65,7 @@ class Login extends Component {
     // push('/dashboard')
     this.props.history.push('/');
     console.log(location.pathname)
-    // this.forceUpdate()
+    this.forceUpdate()
   }
   render() {
     return (

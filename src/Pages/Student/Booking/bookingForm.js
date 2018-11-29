@@ -158,7 +158,15 @@ class BookingForm extends React.Component {
           }
           const modal_res = await this.showAlert('หากคุณไม่มาใช้บริการตามที่จองระบบจะระงับการใช้งานของท่านตามเวลาที่กำหนด', 'คุณแน่ใจหรือไม่ว่าจะทำการจอง?', 'warning', confirm_config)
           if (modal_res.value) {
-            this.showAlert('คุณสามารถตรวจสอบการจองได้ที่หน้าแรก','จองสำเร็จ',  'success')          
+            const res = await axios.post(`/v1/reservation/make`, this.state.reserve_data)
+            console.log(res.data)
+            if(res.data.success){
+              this.showAlert('คุณสามารถตรวจสอบการจองได้ที่หน้าแรก','จองสำเร็จ',  'success')
+            }
+            else{
+              this.showAlert('ไม่สามารถทำรายการจองได้ในขณะนี้ กรุณาทำรายการใหม่ในภายหลัง')
+            }
+                
             this.props.history.push('/')
           }
         }
