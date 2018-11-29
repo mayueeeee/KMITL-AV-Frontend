@@ -6,7 +6,7 @@ import axios from 'axios'
 import Login from './Pages/login'
 import Container from './Pages/container'
 
-axios.defaults.baseURL = 'http://isag.eiei.life:3000'
+axios.defaults.baseURL = 'https://api.lavs.kmi.tl'
 axios.defaults.headers.common['Authorization'] = `Bearer ${window.localStorage.getItem('lavs-access-token')}`
 
 
