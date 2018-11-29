@@ -13,7 +13,7 @@ const routingStore = new RouterStore()
 
 const stores = {
   // Key can be whatever you want
-  routing: routingStore,  
+  routing: routingStore,
   // ...other stores
 }
 
@@ -22,7 +22,7 @@ const history = syncHistoryWithStore(browserHistory, routingStore)
 ReactDOM.render(
   <Provider {...stores}>
     <Router history={history}>
-      <App/>
+      <App />
     </Router>
   </Provider>,
   document.getElementById('root')
