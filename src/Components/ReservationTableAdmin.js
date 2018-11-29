@@ -1,23 +1,23 @@
 import React from 'react';
-import { Table, Button } from 'reactstrap';
+import { Table,Button } from 'reactstrap';
 import axios from 'axios';
 import { format } from 'date-fns';
 import swal from 'sweetalert2'
 
 export default class Example extends React.Component {
-  state = {
-    list_data: []
+  state={
+    list_data:[]
   }
-  async componentDidMount() {
+  async componentDidMount(){
     const res = await axios.get('/v1/reservation/list')
-    this.setState({ list_data: res.data.reserve_list })
+    this.setState({list_data:res.data.reserve_list})
     // console.log(reserveList)
   }
-  handleViewInfo = (id) => {
-    const data = this.state.list_data.find(ele => ele.transaction_id === id)
+  handleViewInfo = (id)=>{
+    const data = this.state.list_data.find(ele=>ele._id===id)
     console.log(data)
     this.props.history.push({
-      pathname: `/booking/${id}`,
+      pathname: `/booking/${id}`,      
       state: { detail: data }
     })
 
@@ -30,7 +30,7 @@ export default class Example extends React.Component {
     //   showCloseButton: true,
     //   showCancelButton: true,
     //   focusConfirm: false,
-
+      
     // })
 
 
@@ -42,22 +42,23 @@ export default class Example extends React.Component {
       <Table>
         <thead>
           <tr>
+            {/* <Route component={adminSidebar} exact path="/ReservationTableAdmin" /> */}
             <th>#</th>
+            <th>สถานะ</th>
             <th>ประเภทห้อง</th>
-            <th>วันที่</th>
-            <th>ช่วงเวลาที่จอง</th>
+            <th>เวลาที่ใช้งาน</th>
             <th></th>
           </tr>
         </thead>
         <tbody>
           {
-            this.state.list_data.map((ele, i) => {
-              return (<tr>
-                <th scope="row">{i + 1}</th>
+            this.state.list_data.map((ele,i)=>{
+              return(<tr>
+                <th scope="row">{i+1}</th>
+                <td>{ele.status}</td>
                 <td>{ele.type}</td>
-                <td>{format(ele.startTime, "DD/MM/YYYY")}</td>
-                <td>{`${format(ele.startTime, "HH:mm")} - ${format(ele.endTime, "HH:mm")}`}</td>
-                <td><Button color="primary" block onClick={(e) => this.handleViewInfo(ele.transaction_id)}>ดูรายละเอียด</Button></td>
+                <td>{`${format(ele.startTime,"HH:mm")} - ${format(ele.endTime,"HH:mm")}`}</td>
+                <td><Button color="primary" block onClick={(e)=>this.handleViewInfo(ele._id)}>ดูรายละเอียด</Button></td>
               </tr>)
             })
           }
