@@ -14,7 +14,7 @@ export default class Example extends React.Component {
     // console.log(reserveList)
   }
   handleViewInfo = (id) => {
-    const data = this.state.list_data.find(ele => ele._id === id)
+    const data = this.state.list_data.find(ele => ele.transaction_id === id)
     console.log(data)
     this.props.history.push({
       pathname: `/booking/${id}`,
@@ -57,7 +57,7 @@ export default class Example extends React.Component {
                 <td>{ele.type}</td>
                 <td>{format(ele.startTime, "DD/MM/YYYY")}</td>
                 <td>{`${format(ele.startTime, "HH:mm")} - ${format(ele.endTime, "HH:mm")}`}</td>
-                <td><Button color="primary" block onClick={(e) => this.handleViewInfo(ele._id)}>ดูรายละเอียด</Button></td>
+                <td><Button color="primary" block onClick={(e) => this.handleViewInfo(ele.transaction_id)}>ดูรายละเอียด</Button></td>
               </tr>)
             })
           }
